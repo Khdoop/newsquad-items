@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { startWith, map, combineLatest, tap, of } from 'rxjs';
 import { ExcOptionEnum, Item, ItemTypeDescriptions, ItemTypeEnum, itemTypes } from './models';
@@ -80,8 +81,10 @@ export class AppComponent {
         return `${value * 4}`;
     }
 
-    onItemSelect(item: Item) {
-        this.selectedItem = <Item>item;
+    onItemSelect(event: MatOptionSelectionChange, item: Item) {
+        if (event.isUserInput) {
+            this.selectedItem = <Item>item;
+        }
     }
 
     onExcOptionChange(optionType: ExcOptionEnum, isSelected: boolean): void {

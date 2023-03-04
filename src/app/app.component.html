@@ -22,7 +22,7 @@
                 [formControl]="itemNameControl" [matAutocomplete]="auto" #itemInputElement>
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <div *ngFor="let option of filteredOptions | async">
-                    <mat-option [value]="option.name" class="example-item" (onSelectionChange)="onItemSelect(option)">
+                    <mat-option [value]="option.name" class="example-item" (onSelectionChange)="onItemSelect($event, option)">
                         {{option.name}}
                     </mat-option>
                 </div>
