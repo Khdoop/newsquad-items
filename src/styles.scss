@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #303030;
+
+    * {
+        color: whitesmoke;
+    }
+}
+
+.mat-autocomplete-panel {
+    max-height: 302px !important;
+}
+
+.mat-simple-snackbar {
+    justify-content: center !important;
+}
+
+.mat-simple-snack-bar-content,
+.mdc-slider__value-indicator-text {
+    color: rgba(0, 0, 0, .87) !important;
+}
+
+// .mdc-menu-surface {
+//     overflow: hidden !important;
+// }
+
+.mat-mdc-option {
+    min-height: 36px !important;
+}
