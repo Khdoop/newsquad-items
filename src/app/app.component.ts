@@ -74,7 +74,7 @@ export class AppComponent {
     }
 
     get itemString() {
-        return `/drop ${this.selectedItem?.section} ${this.selectedItem?.number} ${this.itemLevel} ${+this.skillControl.value!} ${+this.luckControl.value!} ${this.itemAdd} ${this.excOptionsCount} ${this.ancientControl.value ?? ''}`;
+        return `/make ${this.selectedItem?.section} ${this.selectedItem?.number} ${this.itemLevel} ${+this.skillControl.value!} ${+this.luckControl.value!} ${this.itemAdd} ${this.excOptionsCount} ${this.ancientControl.value ?? ''}`;
     }
 
     formatItemAdd(value: number): string {
