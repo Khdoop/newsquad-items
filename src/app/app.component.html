@@ -59,6 +59,13 @@
                 <mat-checkbox name="item-luck" [formControl]="luckControl">Luck</mat-checkbox>
             </div>
         </div>
+        <div class="div10">
+            <div style="width: 80px">Sockets +<span class="item-add">{{itemSockets}}</span></div>
+            <mat-slider name="item-sockets" showTickMarks discrete step="1" min="0" max="5" aria-label="item sockets"
+                style="flex-grow: 2;">
+                <input name="item-sockets" matSliderThumb [(ngModel)]="itemSockets">
+            </mat-slider>
+        </div>
     </div>
     <div class="div5">
         <mat-checkbox name="exc-1" [formControl]="zenManaControl"
@@ -89,6 +96,7 @@
                 <thead>
                     <tr>
                         <th [width]="80"></th>
+                        <th *ngIf="itemSockets" [width]="80"></th>
                         <th [width]="80"></th>
                         <th [width]="80"></th>
                         <th [width]="80"></th>
@@ -103,7 +111,10 @@
                     <tr class="command-string" title="Click to copy the command" (click)="onCopyText()">
                         <td
                             style="padding: 10px;background-color: darkgrey;border-top-left-radius: 6px;border-bottom-left-radius: 6px;">
-                            /make
+                            {{itemSockets ? '/makesocket' : '/make'}}
+                        </td>
+                        <td *ngIf="itemSockets" style="padding: 10px;background-color: darkgrey;">
+                            {{itemSockets}}
                         </td>
                         <td style="padding: 10px;background-color: darkgrey;">
                             {{selectedItem?.section}}
@@ -134,6 +145,9 @@
                     <tr style="opacity: 0.4;">
                         <td style="padding: 10px;">
 
+                        </td>
+                        <td *ngIf="itemSockets" style="padding: 10px;">
+                            sockets
                         </td>
                         <td style="padding: 10px;">
                             section

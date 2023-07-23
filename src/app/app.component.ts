@@ -42,6 +42,7 @@ export class AppComponent {
 
     itemLevel = 0;
     itemAdd = 0;
+    itemSockets = 0;
 
     itemFormGroup = new FormGroup({
         itemName: this.itemNameControl,
@@ -74,7 +75,7 @@ export class AppComponent {
     }
 
     get itemString() {
-        return `/make ${this.selectedItem?.section} ${this.selectedItem?.number} ${this.itemLevel} ${+this.skillControl.value!} ${+this.luckControl.value!} ${this.itemAdd} ${this.excOptionsCount} ${this.ancientControl.value ?? ''}`;
+        return `${this.itemSockets ? `/makesocket ${this.itemSockets}` : '/make'} ${this.selectedItem?.section} ${this.selectedItem?.number} ${this.itemLevel} ${+this.skillControl.value!} ${+this.luckControl.value!} ${this.itemAdd} ${this.excOptionsCount} ${this.ancientControl.value ?? ''}`;
     }
 
     formatItemAdd(value: number): string {
