@@ -149,7 +149,7 @@
         grid-area: 2/5/5/7;
     }
 
-    &::ng-deep {
+    :host ::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
@@ -193,7 +193,7 @@
         grid-area: 2/5/5/7;
     }
 
-    &::ng-deep {
+    :host ::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
