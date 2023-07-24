@@ -120,13 +120,7 @@
     display: none;
 }
 
-@media (width < 1024px) {
-    table * {
-        font-size: 14px;
-    }
-}
-
-@media (width < 700px) {
+.iframe-wrapper {
     table * {
         font-size: 12px;
     }
@@ -139,7 +133,7 @@
         grid-area: 2/5/5/7;
     }
 
-    :host ::ng-deep {
+    &::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;

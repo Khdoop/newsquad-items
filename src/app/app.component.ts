@@ -116,14 +116,14 @@ export class AppComponent {
         this.openSnackBar('Coppied!', 1000);
     }
 
+    public isInIframe() {
+        const result = window.location !== window.parent.location;
+        return result;
+    }
+
     private filterOptions(): Item[] {
         const filterValue = this.itemNameControl.value!.toLowerCase();
         return this.items.filter(option => option.name?.toLowerCase().includes(filterValue ? filterValue : '')
             && (this.selectedItemTypeControl.value !== this.selectedItemTypeAll ? +option.section === +this.selectedItemTypeControl.value! : true));
-    }
-
-    private isInIframe() {
-        const result =  window.location !== window.parent.location;
-        return result;
     }
 }
