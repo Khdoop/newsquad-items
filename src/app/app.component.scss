@@ -11,6 +11,7 @@
     font-size: 40px;
     line-height: 42px;
     padding-bottom: 30px;
+    text-align: center;
 }
 
 .example-form {
@@ -40,7 +41,7 @@
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     width: 800px;
-    max-width: 800px;
+    max-width: 100%;
 }
 
 .div2 {
@@ -117,4 +118,31 @@
 
 .hide {
     display: none;
+}
+
+@media (width < 1024px) {
+    table * {
+        font-size: 14px;
+    }
+}
+
+@media (width < 700px) {
+    table * {
+        font-size: 12px;
+    }
+
+    .div4 {
+        grid-area: 2/1/5/5;
+    }
+
+    .div5 {
+        grid-area: 2/5/5/7;
+    }
+
+    :host ::ng-deep {
+        .mat-button-toggle-label-content {
+            padding: 6px !important;
+            font-size: 12px;
+        }
+    }
 }
