@@ -140,3 +140,30 @@
         }
     }
 }
+
+@media (width < 1024px) {
+    table * {
+        font-size: 14px;
+    }
+}
+
+@media (width < 700px) {
+    table * {
+        font-size: 12px;
+    }
+
+    .div4 {
+        grid-area: 2/1/5/5;
+    }
+
+    .div5 {
+        grid-area: 2/5/5/7;
+    }
+
+    :host ::ng-deep {
+        .mat-button-toggle-label-content {
+            padding: 6px !important;
+            font-size: 12px;
+        }
+    }
+}
