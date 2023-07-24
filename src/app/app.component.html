@@ -1,181 +1,187 @@
-<div class="app-title">
-    NewSquad MU items maker
-</div>
-<div class="grid-wrapper">
-    <div class="div2">
-        <mat-form-field appearance="fill" style="width: 100%;">
-            <mat-label>Section</mat-label>
-            <mat-select name="Section" [formControl]="selectedItemTypeControl">
-                <mat-option [value]="100">
-                    All
-                </mat-option>
-                <mat-option *ngFor="let itemType of itemTypes" [value]="itemType">
-                    {{itemTypeDescriptions[itemType]}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+<div class="app-wrapper" [class.iframe-wrapper]="isInIframe()">
+    <div class="app-title">
+        NewSquad MU items maker
     </div>
-    <div class="div3">
-        <mat-form-field style="width: 100%;" appearance="fill">
-            <mat-label>Item</mat-label>
-            <input type="text" name="item-name" placeholder="Search for an item here" aria-label="Item" matInput
-                [formControl]="itemNameControl" [matAutocomplete]="auto" #itemInputElement>
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <div *ngFor="let option of filteredOptions | async">
-                    <mat-option [value]="option.name" class="example-item" (onSelectionChange)="onItemSelect($event, option)">
-                        {{option.name}}
+    <div class="grid-wrapper">
+        <div class="div2">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Section</mat-label>
+                <mat-select name="Section" [formControl]="selectedItemTypeControl">
+                    <mat-option [value]="100">
+                        All
                     </mat-option>
+                    <mat-option *ngFor="let itemType of itemTypes" [value]="itemType">
+                        {{itemTypeDescriptions[itemType]}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="div3">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>Item</mat-label>
+                <input type="text" name="item-name" placeholder="Search for an item here" aria-label="Item" matInput
+                    [formControl]="itemNameControl" [matAutocomplete]="auto" #itemInputElement>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <div *ngFor="let option of filteredOptions | async">
+                        <mat-option [value]="option.name" class="example-item"
+                            (onSelectionChange)="onItemSelect($event, option)">
+                            {{option.name}}
+                        </mat-option>
+                    </div>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="div4">
+            <div class="div7">
+                <div style="width: 60px;flex-shrink: 0;">level +<span class="item-level">{{itemLevel}}</span>
                 </div>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
-    <div class="div4">
-        <div class="div7">
-            <div style="width: 60px;flex-shrink: 0;">level +<span class="item-level">{{itemLevel}}</span>
+                <mat-slider name="item-level" showTickMarks discrete step="1" min="0" max="15" aria-label="item level"
+                    style="flex-grow: 2;">
+                    <input name="item-level" matSliderThumb [(ngModel)]="itemLevel">
+                </mat-slider>
             </div>
-            <mat-slider name="item-level" showTickMarks discrete step="1" min="0" max="15" aria-label="item level"
-                style="flex-grow: 2;">
-                <input name="item-level" matSliderThumb [(ngModel)]="itemLevel">
-            </mat-slider>
-        </div>
-        <div class="div8">
-            <div style="width: 60px">add +<span class="item-add">{{formatItemAdd(+itemAdd!)}}</span></div>
-            <mat-slider name="item-add" showTickMarks discrete step="1" min="0" max="7" aria-label="item level"
-                style="flex-grow: 2;" [displayWith]="formatItemAdd">
-                <input name="item-add" matSliderThumb [(ngModel)]="itemAdd">
-            </mat-slider>
-        </div>
-        <div class="div9">
-            <div>
-                Ancient set
+            <div class="div8">
+                <div style="width: 60px">add +<span class="item-add">{{formatItemAdd(+itemAdd!)}}</span></div>
+                <mat-slider name="item-add" showTickMarks discrete step="1" min="0" max="7" aria-label="item level"
+                    style="flex-grow: 2;" [displayWith]="formatItemAdd">
+                    <input name="item-add" matSliderThumb [(ngModel)]="itemAdd">
+                </mat-slider>
             </div>
-            <div class="ancient-option-misc-wrapper" style="display: flex;align-items: center;justify-content: space-between;">
-                <mat-button-toggle-group name="ancientSet" aria-label="Ancient Set" [formControl]="ancientControl">
-                    <mat-button-toggle [value]="null">None</mat-button-toggle>
-                    <mat-button-toggle [value]="5">Set 1</mat-button-toggle>
-                    <mat-button-toggle [value]="6">Set 2</mat-button-toggle>
-                </mat-button-toggle-group>
-                <mat-checkbox name="item-skill" [formControl]="skillControl">Skill</mat-checkbox>
-                <mat-checkbox name="item-luck" [formControl]="luckControl">Luck</mat-checkbox>
+            <div class="div9">
+                <div>
+                    Ancient set
+                </div>
+                <div class="ancient-option-misc-wrapper"
+                    style="display: flex;align-items: center;justify-content: space-between;">
+                    <mat-button-toggle-group name="ancientSet" aria-label="Ancient Set" [formControl]="ancientControl">
+                        <mat-button-toggle [value]="null">None</mat-button-toggle>
+                        <mat-button-toggle [value]="5">Set 1</mat-button-toggle>
+                        <mat-button-toggle [value]="6">Set 2</mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <mat-checkbox name="item-skill" [formControl]="skillControl">Skill</mat-checkbox>
+                    <mat-checkbox name="item-luck" [formControl]="luckControl">Luck</mat-checkbox>
+                </div>
+            </div>
+            <div class="div10">
+                <div style="width: 80px">Sockets +<span class="item-add">{{itemSockets}}</span></div>
+                <mat-slider name="item-sockets" showTickMarks discrete step="1" min="0" max="5"
+                    aria-label="item sockets" style="flex-grow: 2;">
+                    <input name="item-sockets" matSliderThumb [(ngModel)]="itemSockets">
+                </mat-slider>
             </div>
         </div>
-        <div class="div10">
-            <div style="width: 80px">Sockets +<span class="item-add">{{itemSockets}}</span></div>
-            <mat-slider name="item-sockets" showTickMarks discrete step="1" min="0" max="5" aria-label="item sockets"
-                style="flex-grow: 2;">
-                <input name="item-sockets" matSliderThumb [(ngModel)]="itemSockets">
-            </mat-slider>
+        <div class="div5">
+            <mat-checkbox name="exc-1" [formControl]="zenManaControl"
+                (change)="onExcOptionChange(excOptionEnum.zenMana, zenManaControl.value!)"><span
+                    class="armor-stat">ZEN</span> | <span class="wep-stat">mana</span></mat-checkbox>
+            <mat-checkbox name="exc-2" [formControl]="dsrLifeControl"
+                (change)="onExcOptionChange(excOptionEnum.dsrLife, dsrLifeControl.value!)"><span
+                    class="armor-stat">DSR</span> | <span class="wep-stat">life</span></mat-checkbox>
+            <mat-checkbox name="exc-3" [formControl]="refSpeedControl"
+                (change)="onExcOptionChange(excOptionEnum.refSpeed, refSpeedControl.value!)"><span
+                    class="armor-stat">REF</span> | <span class="wep-stat">speed</span>
+            </mat-checkbox>
+            <mat-checkbox name="exc-4" [formControl]="ddInc2Control"
+                (change)="onExcOptionChange(excOptionEnum.ddInc2, ddInc2Control.value!)"><span
+                    class="armor-stat">DD</span>
+                | <span class="wep-stat">inc2</span></mat-checkbox>
+            <mat-checkbox name="exc-5" [formControl]="manaLvl20Control"
+                (change)="onExcOptionChange(excOptionEnum.manaLvl20, manaLvl20Control.value!)"><span
+                    class="armor-stat">MANA</span> | <span class="wep-stat">lvl20</span>
+            </mat-checkbox>
+            <mat-checkbox name="exc-6" [formControl]="hpEdrControl"
+                (change)="onExcOptionChange(excOptionEnum.hpEdr, hpEdrControl.value!)"><span
+                    class="armor-stat">HP</span> |
+                <span class="wep-stat">EDR</span></mat-checkbox>
         </div>
-    </div>
-    <div class="div5">
-        <mat-checkbox name="exc-1" [formControl]="zenManaControl"
-            (change)="onExcOptionChange(excOptionEnum.zenMana, zenManaControl.value!)"><span
-                class="armor-stat">ZEN</span> | <span class="wep-stat">mana</span></mat-checkbox>
-        <mat-checkbox name="exc-2" [formControl]="dsrLifeControl"
-            (change)="onExcOptionChange(excOptionEnum.dsrLife, dsrLifeControl.value!)"><span
-                class="armor-stat">DSR</span> | <span class="wep-stat">life</span></mat-checkbox>
-        <mat-checkbox name="exc-3" [formControl]="refSpeedControl"
-            (change)="onExcOptionChange(excOptionEnum.refSpeed, refSpeedControl.value!)"><span
-                class="armor-stat">REF</span> | <span class="wep-stat">speed</span>
-        </mat-checkbox>
-        <mat-checkbox name="exc-4" [formControl]="ddInc2Control"
-            (change)="onExcOptionChange(excOptionEnum.ddInc2, ddInc2Control.value!)"><span class="armor-stat">DD</span>
-            | <span class="wep-stat">inc2</span></mat-checkbox>
-        <mat-checkbox name="exc-5" [formControl]="manaLvl20Control"
-            (change)="onExcOptionChange(excOptionEnum.manaLvl20, manaLvl20Control.value!)"><span
-                class="armor-stat">MANA</span> | <span class="wep-stat">lvl20</span>
-        </mat-checkbox>
-        <mat-checkbox name="exc-6" [formControl]="hpEdrControl"
-            (change)="onExcOptionChange(excOptionEnum.hpEdr, hpEdrControl.value!)"><span class="armor-stat">HP</span> |
-            <span class="wep-stat">EDR</span></mat-checkbox>
-    </div>
-    <div class="div6">
-        <div [ngStyle]="{'visibility': selectedItem ? 'visible' : 'hidden'}"
-            style="font-size: 20px; display: flex;justify-content: center;">
-            <table style="text-align: center;border-collapse: collapse;margin-top: 20px">
-                <thead>
-                    <tr>
-                        <th [width]="80"></th>
-                        <th *ngIf="itemSockets" [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                        <th [width]="80"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="command-string" title="Click to copy the command" (click)="onCopyText()">
-                        <td
-                            style="padding: 10px;background-color: darkgrey;border-top-left-radius: 6px;border-bottom-left-radius: 6px;">
-                            {{itemSockets ? '/makesocket' : '/make'}}
-                        </td>
-                        <td *ngIf="itemSockets" style="padding: 10px;background-color: darkgrey;">
-                            {{itemSockets}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{selectedItem?.section}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{selectedItem?.number}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{itemLevel}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{+skillControl.value!}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{+luckControl.value!}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{itemAdd}}
-                        </td>
-                        <td style="padding: 10px;background-color: darkgrey;">
-                            {{excOptionsCount}}
-                        </td>
-                        <td
-                            style="padding: 10px;background-color: darkgrey;border-top-right-radius: 6px;border-bottom-right-radius: 6px;">
-                            {{ancientControl.value}}
-                        </td>
-                    </tr>
-                    <tr style="opacity: 0.4;">
-                        <td style="padding: 10px;">
+        <div class="div6">
+            <div [ngStyle]="{'visibility': selectedItem ? 'visible' : 'hidden'}"
+                style="font-size: 20px; display: flex;justify-content: center;">
+                <table style="text-align: center;border-collapse: collapse;margin-top: 20px">
+                    <thead>
+                        <tr>
+                            <th [width]="80"></th>
+                            <th *ngIf="itemSockets" [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                            <th [width]="80"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="command-string" title="Click to copy the command" (click)="onCopyText()">
+                            <td
+                                style="padding: 10px;background-color: darkgrey;border-top-left-radius: 6px;border-bottom-left-radius: 6px;">
+                                {{itemSockets ? '/makesocket' : '/make'}}
+                            </td>
+                            <td *ngIf="itemSockets" style="padding: 10px;background-color: darkgrey;">
+                                {{itemSockets}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{selectedItem?.section}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{selectedItem?.number}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{itemLevel}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{+skillControl.value!}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{+luckControl.value!}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{itemAdd}}
+                            </td>
+                            <td style="padding: 10px;background-color: darkgrey;">
+                                {{excOptionsCount}}
+                            </td>
+                            <td
+                                style="padding: 10px;background-color: darkgrey;border-top-right-radius: 6px;border-bottom-right-radius: 6px;">
+                                {{ancientControl.value}}
+                            </td>
+                        </tr>
+                        <tr style="opacity: 0.4;">
+                            <td style="padding: 10px;">
 
-                        </td>
-                        <td *ngIf="itemSockets" style="padding: 10px;">
-                            sockets
-                        </td>
-                        <td style="padding: 10px;">
-                            section
-                        </td>
-                        <td>
-                            type
-                        </td>
-                        <td>
-                            level
-                        </td>
-                        <td>
-                            skill
-                        </td>
-                        <td>
-                            luck
-                        </td>
-                        <td>
-                            add
-                        </td>
-                        <td>
-                            exc
-                        </td>
-                        <td>
-                            anc
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                            <td *ngIf="itemSockets" style="padding: 10px;">
+                                sockets
+                            </td>
+                            <td style="padding: 10px;">
+                                section
+                            </td>
+                            <td>
+                                type
+                            </td>
+                            <td>
+                                level
+                            </td>
+                            <td>
+                                skill
+                            </td>
+                            <td>
+                                luck
+                            </td>
+                            <td>
+                                add
+                            </td>
+                            <td>
+                                exc
+                            </td>
+                            <td>
+                                anc
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

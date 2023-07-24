@@ -1,10 +1,13 @@
 :host {
+    display: block;
+}
+
+.app-wrapper {
     display: flex;
     justify-content: center;
     padding: 20px 20px 100px 20px;
     flex-direction: column;
     align-items: center;
-
 }
 
 .app-title {
@@ -121,16 +124,14 @@
 }
 
 .iframe-wrapper {
+    padding: 16px;
+
     .app-title {
         padding-bottom: 10px;
     }
 
     .grid-wrapper {
         grid-row-gap: 4px;
-    }
-
-    :host {
-        padding: 20px;
     }
 
     table {
@@ -149,7 +150,7 @@
         grid-area: 2/5/5/7;
     }
 
-    :host ::ng-deep {
+    .app-wrapper ::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
@@ -173,8 +174,8 @@
         grid-row-gap: 4px;
     }
 
-    :host {
-        padding: 20px;
+    .app-wrapper {
+        padding: 16px;
     }
 
     table {
@@ -193,7 +194,7 @@
         grid-area: 2/5/5/7;
     }
 
-    :host ::ng-deep {
+    .app-wrapper ::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
