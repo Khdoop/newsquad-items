@@ -99,7 +99,20 @@ export class AppComponent {
     }
 
     onCopyText() {
-        navigator.clipboard.writeText(this.itemString.trim());
+        if (this.isInIframe()) {
+            // console.log('execCommand')
+            var copyTextarea = document.createElement("textarea");
+            copyTextarea.style.position = "fixed";
+            copyTextarea.style.opacity = "0";
+            copyTextarea.textContent = this.itemString.trim();
+            document.body.appendChild(copyTextarea);
+            copyTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(copyTextarea);
+        } else {
+            navigator.clipboard.writeText(this.itemString.trim());
+            // console.log('navigator.clipboard')
+        }
         this.openSnackBar('Coppied!', 1000);
     }
 
@@ -107,5 +120,10 @@ export class AppComponent {
         const filterValue = this.itemNameControl.value!.toLowerCase();
         return this.items.filter(option => option.name?.toLowerCase().includes(filterValue ? filterValue : '')
             && (this.selectedItemTypeControl.value !== this.selectedItemTypeAll ? +option.section === +this.selectedItemTypeControl.value! : true));
+    }
+
+    private isInIframe() {
+        const result =  window.location !== window.parent.location;
+        return result;
     }
 }
