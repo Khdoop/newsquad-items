@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,6 +13,9 @@ import items from './result.json';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+    @HostBinding('.iframe-wrapper')
+    public addClass = this.isInIframe();
 
     readonly selectedItemTypeAll = 100;
 
