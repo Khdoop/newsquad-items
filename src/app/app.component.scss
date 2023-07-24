@@ -121,8 +121,24 @@
 }
 
 .iframe-wrapper {
-    table * {
-        font-size: 12px;
+    .app-title {
+        padding-bottom: 10px;
+    }
+
+    .grid-wrapper {
+        grid-row-gap: 4px;
+    }
+
+    :host {
+        padding: 20px;
+    }
+
+    table {
+        margin-top: 0px !important;
+
+        * {
+            font-size: 12px;
+        }
     }
 
     .div4 {
@@ -137,6 +153,7 @@
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
+            line-height: 30px !important;
         }
     }
 }
@@ -148,8 +165,24 @@
 }
 
 @media (width < 700px) {
-    table * {
-        font-size: 12px;
+    .app-title {
+        padding-bottom: 10px;
+    }
+
+    .grid-wrapper {
+        grid-row-gap: 4px;
+    }
+
+    :host {
+        padding: 20px;
+    }
+
+    table {
+        margin-top: 0px !important;
+
+        * {
+            font-size: 12px;
+        }
     }
 
     .div4 {
@@ -160,10 +193,11 @@
         grid-area: 2/5/5/7;
     }
 
-    :host ::ng-deep {
+    &::ng-deep {
         .mat-button-toggle-label-content {
             padding: 6px !important;
             font-size: 12px;
+            line-height: 30px !important;
         }
     }
 }
